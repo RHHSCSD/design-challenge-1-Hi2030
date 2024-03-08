@@ -33,6 +33,7 @@ import java.text.*;
 *5         -50 50 0   Please refrain from entering negative numbers
 *6         0 1 0      65 65
 *7         46 67 12   7395.5 59.16
+*8         0 0 0      There are no students participating
 ***************************************************/
 public class DesignProjectOne {
     /**
@@ -75,8 +76,12 @@ public class DesignProjectOne {
    
             totalPrice = (fixedCost * totalNum) + (arduinoNum * arduinoPrice) + (raspberryNum * raspberryPrice) + (vrNum * vrPrice)
             studentPrice = totalPrice/totalNum
-            PRINT studentPrice
-            PRINT totalPrice
+            IF (totalPrice == 0)
+               PRINT "No students participating"
+            ELSE
+                PRINT studentPrice
+                PRINT totalPrice
+            ENDIF
         ENDIF
    END
    */
@@ -138,8 +143,13 @@ public class DesignProjectOne {
             DecimalFormat d = new DecimalFormat("#.##");
             totalPrice = (fixedCost * totalNum) + (arduinoNum * arduinoPrice) + (raspberryNum * raspberryPrice) + (vrNum * vrPrice);
             studentPrice = totalPrice/totalNum;
-            System.out.println("Total Price: $" + d.format(totalPrice)); 
-            System.out.println("Student Price: $" + d.format(studentPrice)); 
+            if (totalPrice == 0){
+                System.out.println("There are no students participating");
+            }
+            else {
+               System.out.println("Total Price: $" + d.format(totalPrice)); 
+               System.out.println("Student Price: $" + d.format(studentPrice));  
+            }
         }
     }
 }
