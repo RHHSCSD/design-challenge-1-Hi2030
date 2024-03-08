@@ -3,8 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
 package designprojectone;
-import java.util.*;
 import java.util.Scanner;
+import java.text.*;
 /***************************************************
 *  Program: Tech Fair Cost Calculator
 *  Author: Haydn Y
@@ -32,10 +32,9 @@ import java.util.Scanner;
 *4         -1 50 1    Please refrain from entering negative numbers
 *5         -50 50 0   Please refrain from entering negative numbers
 *6         0 1 0      65 65
-*
+*7         46 67 12   7395.5 59.16
 ***************************************************/
 public class DesignProjectOne {
-
     /**
      * @param args the command line arguments
      */
@@ -82,11 +81,13 @@ public class DesignProjectOne {
    END
    */
   //CONSTANTS
-        final int fixedCost = 50;
-        final double arduinoPrice = 10;
-        final double raspberryPrice = 15;
-        final double vrPrice = 20;
+        
   //VARIABLES
+        double fixedCost;
+        int arduinoPrice = 10;
+        int raspberryPrice = 15;
+        int vrPrice = 20;
+  
         int arduinoNum;
         int raspberryNum;
         int vrNum;
@@ -103,14 +104,42 @@ public class DesignProjectOne {
         System.out.print("Enter number of students for VR: ");
         vrNum = input.nextInt();
         
+        //Calculate total number of students participating
         totalNum = arduinoNum + raspberryNum + vrNum;
         
+        //Decide if the user inputted any negative numbers
         if (arduinoNum < 0 || raspberryNum < 0 || vrNum < 0){
             System.out.println("Please refrain from entering negative numbers");
-            return;
         }
         else{
+            //Decide if there should be a discount based on total number of students
+            if (totalNum > 100)
+                fixedCost = 47.5;
+            else
+                fixedCost = 50;
             
+           //Decide if there should be a discount for price of Arduino 
+           if (arduinoNum > 15)
+                arduinoPrice--;
+            else if (arduinoNum > 0 && arduinoNum<=15)
+                arduinoPrice = 10;
+            else
+                arduinoPrice = 0;
+            
+            //Decide if there should be a discount for price of RaspberryPI 
+            if (raspberryNum > 20)
+                raspberryPrice -= 3;
+            else if (raspberryNum > 0 && raspberryNum<=20)
+                raspberryPrice = 15;
+            else
+                raspberryPrice = 0;
+            
+            //Calculate final totals and output to the user to two decimal places
+            DecimalFormat d = new DecimalFormat("#.##");
+            totalPrice = (fixedCost * totalNum) + (arduinoNum * arduinoPrice) + (raspberryNum * raspberryPrice) + (vrNum * vrPrice);
+            studentPrice = totalPrice/totalNum;
+            System.out.println("Total Price: $" + d.format(totalPrice)); 
+            System.out.println("Student Price: $" + d.format(studentPrice)); 
         }
-    
+    }
 }
