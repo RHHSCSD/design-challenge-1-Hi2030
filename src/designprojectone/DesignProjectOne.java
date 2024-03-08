@@ -143,6 +143,8 @@ public class DesignProjectOne {
             DecimalFormat d = new DecimalFormat("#.##");
             totalPrice = (fixedCost * totalNum) + (arduinoNum * arduinoPrice) + (raspberryNum * raspberryPrice) + (vrNum * vrPrice);
             studentPrice = totalPrice/totalNum;
+            
+            //Check to see if user inputted 0s and there are no students participating
             if (totalPrice == 0){
                 System.out.println("There are no students participating");
             }
